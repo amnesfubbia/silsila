@@ -1,0 +1,23 @@
+PANDUAN MENYIAPKAN POHON KELUARGA ONLINE
+
+Persiapan yang dibutuhkan
+1. Buat proyek di https://supabase.com/ dan simpan Project URL serta anon/publishable key. Jangan pernah menaruh service_role key di HTML.
+2. Di dashboard Supabase, buka SQL Editor. Buka berkas supabase_schema.sql, salin seluruh isinya, lalu jalankan pada proyek baru. Tinjau hasilnya dan pastikan semua tabel serta policies berhasil dibuat.
+3. Buka online.html melalui browser dengan koneksi internet. Library Supabase dimuat dari CDN.
+4. Di bagian “Hubungkan database”, isi Project URL dan anon/publishable key. Tekan “Simpan & hubungkan”.
+5. Daftar dengan email dan kata sandi. Jika konfirmasi email aktif, buka email untuk mengonfirmasi lalu masuk.
+6. Buat ruang keluarga. Setelah berhasil, tambahkan profil anggota dan cerita keluarga. Data masuk ke database online.
+
+BATASAN VERSI INI
+- Ini MVP koneksi online, bukan rilis produksi final.
+- Anggota keluarga lain belum dapat bergabung melalui undangan dalam antarmuka ini. Undangan aman memerlukan fungsi server-side/Edge Function untuk membuat dan memvalidasi token.
+- Pohon online saat ini menampilkan daftar profil dalam kolom sederhana. Hubungan ayah, ibu, pasangan, persetujuan perubahan, dan pengaitan akun dengan profil belum diimplementasikan di UI online.
+- Pada schema saat ini, profil baru hanya bisa ditambahkan owner/admin; sesuaikan dan uji RLS sebelum digunakan keluarga nyata.
+- Jika pembuatan keluarga gagal setelah tabel keluarga berhasil dibuat, periksa family_memberships dan RLS; hapus keluarga yatim hanya setelah memastikan belum ada data penting.
+- Jangan unggah dokumen identitas, alamat, atau data sensitif saat uji coba. Uji dengan data contoh terlebih dahulu.
+
+KEAMANAN
+- Anon/publishable key memang digunakan di frontend, tetapi RLS wajib aktif.
+- Jangan pernah memasukkan service_role key ke HTML atau membagikannya.
+- Uji akun dari dua keluarga berbeda untuk memastikan tidak bisa membaca data keluarga lain.
+- Sebelum produksi, audit policy, aturan undangan, storage foto, siklus hubungan keluarga, dan backup.
